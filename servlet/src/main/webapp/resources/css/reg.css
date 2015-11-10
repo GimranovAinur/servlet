@@ -1,0 +1,19 @@
+.well.bs-component{
+    background:#151515;
+}
+.col-lg-10.col-lg-offset-2{
+    padding-top:30px;
+}
+.centered {
+    position: absolute;
+    top: 15%;
+    left: 34%;
+    width: 870px;
+    height:200px;
+}
+.left_bot {
+    position:absolute;
+    top:95%;
+    width: 200px;
+    height: 0px;
+}
