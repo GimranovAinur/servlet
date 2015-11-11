@@ -43,7 +43,6 @@
                                     "<div id='post_id' hidden>"+response.id+"</div>"+
                                     "</div>"
                             );
-                            $("html,body").animate({scrollTop:$(document).height()},"fast");
                         },
                         'json'
                 )
@@ -155,7 +154,7 @@
                         <form class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
 
                             <div class="form-group">
-                                <textarea spellcheck="false" style="resize: none" name="post" class="form-control" rows="5" id="text" placeholder="Write something..."></textarea>
+                                <textarea spellcheck="false" name="post" class="form-control" id="text" placeholder="Write something..."></textarea>
                             </div>
                             <c:if test="${not empty user}">
                                 <button type="submit" id="post_btn" class="btn btn-primary">Post</button>
