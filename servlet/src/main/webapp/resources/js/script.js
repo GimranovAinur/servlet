@@ -9,8 +9,8 @@ $(document).ready(function(){
             return false;
         }
         $.post("<c:url value='/posts'/>", {"post":textForPost}, function(response){
-            $('#post_btn').text("send").attr("disabled", false);
-            $('textarea#text').val('');
+            $('#post_btn').text("Post").attr("disabled", false);
+            $('textarea#post').val('');
             $('#postPlace').append(
                 "<div class='panel panel-default'>"+
                 "<div class='panel-heading'>" +
@@ -24,7 +24,7 @@ $(document).ready(function(){
                 "<div class='panel-footer' style='padding-bottom:50px;'>"+
                 "<span class='pull-left'>"+
                 "Published time : "+
-                "<p>"+response.pTime+"</p>"+
+                "<p>"+response.postTime+"</p>"+
                 "</span>"+
                 "<div id='post_id' hidden>"+response.id+"</div>"+
                 "</div>"

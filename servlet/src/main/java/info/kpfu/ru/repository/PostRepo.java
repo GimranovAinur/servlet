@@ -12,17 +12,25 @@ import java.util.List;
 
 public class PostRepo {
 
-    public static void addPost(Post post) throws DBException, SQLException {
+    public static int addPost(Post post) throws SQLException, DBException {
 
-        Connection conn = Database.getConnection();
         StringBuilder s = new StringBuilder("insert into posts(text,date,user_id)")
                 .append("values(?, ?, ?);");
-        PreparedStatement p = conn.prepareStatement(s.toString());
+
+        PreparedStatement p = Database.getConnection().prepareStatement(s.toString(), Statement.RETURN_GENERATED_KEYS);
+
         p.setNString(1, post.getText());
+
         p.setString(2, post.getPub_date());
-        p.setInt(3,post.getUser_id());
+        p.setInt(3, post.getUser_id());
+
         p.executeUpdate();
 
+        ResultSet set = p.getGeneratedKeys();
+        if (set.next()){
+            return set.getInt(1);
+        }
+        return -1;
     }
 
     public static List<Post> getAllPosts() throws DBException,SQLException {

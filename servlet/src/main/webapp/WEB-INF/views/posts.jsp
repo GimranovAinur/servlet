@@ -9,9 +9,47 @@
     <link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="./bootstrap.css" media="screen">
-    <link href="<c:url value="/resources/css/posts.css"/>" rel="stylesheet">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
     <title>Posts</title>
 
+    <script>
+        $(document).ready(function(){
+            $('#post_btn').click(function(e){
+                var textForPost = $('textarea').val();
+                e.preventDefault();
+                if( !textForPost ){
+                    alert("Type something, please" +
+                            "");
+                    return false;
+                }
+                $.post("<c:url value='/posts'/>", {"post":textForPost}, function(response){
+                            $('#post_btn');
+                            $('textarea#post').val('');
+                            $('#postPlace').append(
+                                    "<div class='panel panel-default'>"+
+                                    "<div class='panel-heading'>" +
+                                    "<h1 class='panel-title'>"+
+                                    "<p>"+response.userName+"</p>"+
+                                    "</h1>"+
+                                    "</div>"+
+                                    "<div class='panel-body'>"+
+                                    "<p>"+ response.postText + "</p>"+
+                                    "</div>"+
+                                    "<div class='panel-footer' style='padding-bottom:50px;'>"+
+                                    "<span class='pull-left'>"+
+                                    "Published time : "+
+                                    "<p>"+response.postTime+"</p>"+
+                                    "</span>"+
+                                    "<div id='post_id' hidden>"+response.id+"</div>"+
+                                    "</div>"
+                            );
+                            $("html,body").animate({scrollTop:$(document).height()},"fast");
+                        },
+                        'json'
+                )
+            });
+        });
+    </script>
     <style>
         .left_bot {
             position:fixed;
